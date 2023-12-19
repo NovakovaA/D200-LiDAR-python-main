@@ -160,6 +160,7 @@ if __name__ == "__main__":
                     filtered_data.append(d)
 
         for i, lm in enumerate(filtered_data):
+            if 360 > lm.angle > 0:
                 x.append(lm.distance * sin(math.radians(float(lm.angle))))
                 y.append(lm.distance * cos(math.radians(float(lm.angle))))
 
