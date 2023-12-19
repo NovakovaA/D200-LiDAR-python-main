@@ -60,7 +60,7 @@ class Packet:
         self.end_angle = int.from_bytes(self.raw_data[42:44], 'little') * 0.01
         self.timestamp = int.from_bytes(self.raw_data[44:46], 'little')
         if self.timestamp > 30000:
-            raise ValueError
+            pass
         for i in range(6, 42, 3):
             three_bytes = self.raw_data[i:i+3]
             distance = int.from_bytes(three_bytes[0:2], 'little')
@@ -152,8 +152,8 @@ if __name__ == "__main__":
 
         for p in data.packet_list:
             for d in p.datapoints:
-                if p.distance > 0:
-                    filtered_data.append(p)
+                if d.distance > 0:
+                    filtered_data.append(d)
 
         for i, lm in enumerate(filtered_data):
                 x.append(lm.distance * sin(lm.angle * pi / 180))
