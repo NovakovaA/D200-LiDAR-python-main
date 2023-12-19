@@ -60,7 +60,7 @@ class Packet:
         self.end_angle = int.from_bytes(self.raw_data[42:44], 'little') * 0.01
         self.timestamp = int.from_bytes(self.raw_data[44:46], 'little')
         if self.timestamp > 30000:
-            pass
+            return
         for i in range(6, 42, 3):
             three_bytes = self.raw_data[i:i+3]
             distance = int.from_bytes(three_bytes[0:2], 'little')
