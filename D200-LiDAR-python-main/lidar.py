@@ -145,12 +145,10 @@ class Lidar:
 
 if __name__ == "__main__":
     
-
-    x = []
-    y = []
-
-    for _ in range(1):
-        lidar = Lidar('COM4')
+    lidar = Lidar('COM4')
+    while True:
+        x = []
+        y = []
         data = lidar.capture_circle()
 
         filtered_data = []
@@ -164,6 +162,6 @@ if __name__ == "__main__":
             x.append(lm.distance / 10 * sin(math.radians(float(lm.angle))))
             y.append(lm.distance / 10 * cos(math.radians(float(lm.angle))))
 
-    plt.scatter(x, y) 
-    plt.show()
+        plt.scatter(x, y) 
+        plt.show()
     
