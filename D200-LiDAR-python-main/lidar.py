@@ -5,6 +5,7 @@ import copy
 
 import matplotlib.pyplot as plt 
 from math import cos, sin, pi
+import math
 
 class Circle:
     def __init__(self):
@@ -156,8 +157,8 @@ if __name__ == "__main__":
                     filtered_data.append(d)
 
         for i, lm in enumerate(filtered_data):
-                x.append(lm.distance * sin(lm.angle * pi / 180))
-                y.append(lm.distance * cos(lm.angle * pi / 180))
+                x.append(lm.distance * sin(math.radians(float(lm.angle))))
+                y.append(lm.distance * cos(math.radians(float(lm.angle))))
 
     plt.scatter(x, y) 
     plt.show()
