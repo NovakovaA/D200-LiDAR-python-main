@@ -6,7 +6,6 @@ import copy
 import matplotlib.pyplot as plt 
 from math import cos, sin, pi
 import math
-import time
 
 class Circle:
     def __init__(self):
@@ -145,11 +144,12 @@ class Lidar:
 
 
 if __name__ == "__main__":
-    
     lidar = Lidar('COM4')
-    while True:
-        x = []
-        y = []
+
+    x = []
+    y = []
+
+    for _ in range(10):
         data = lidar.capture_circle()
 
         filtered_data = []
@@ -163,6 +163,6 @@ if __name__ == "__main__":
             x.append(lm.distance / 10 * sin(math.radians(float(lm.angle))))
             y.append(lm.distance / 10 * cos(math.radians(float(lm.angle))))
 
-        plt.scatter(x, y) 
-        plt.show()
+    plt.scatter(x, y) 
+    plt.show()
     
