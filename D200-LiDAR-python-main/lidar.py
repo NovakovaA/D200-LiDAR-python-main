@@ -1,6 +1,10 @@
 import serial
 import csv
 from collections import deque
+import copy
+
+import matplotlib.pyplot as plt 
+from math import cos, sin, pi
 
 class Circle:
     def __init__(self):
@@ -137,8 +141,24 @@ class Lidar:
 
 if __name__ == "__main__":
     lidar = Lidar('COM4')
-    data = lidar.capture_circle()
-    print(data)
-    for p in data.packet_list:
-        print(p.datapoints)
+
+    x = []
+    y = []
+
+    for _ in range(10):
+        data = lidar.capture_circle()
+
+        filtered_data = copy.deepcopy(data)
+        filtered_data.packet_list = []
+
+        for p in data.packet_list:
+            if p.distance > 0:
+                filtered_data.packet_list.append(p)
+
+        for i, lm in enumerate(filtered_data.packet_list):
+                x.append(lm.distance * sin(lm.angle * pi / 180))
+                y.append(lm.distance * cos(lm.angle * pi / 180))
+
+    plt.scatter(x, y) 
+    plt.show()
     
