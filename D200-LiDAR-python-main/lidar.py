@@ -6,6 +6,7 @@ import copy
 import matplotlib.pyplot as plt 
 from math import cos, sin, pi
 import math
+import time
 
 class Circle:
     def __init__(self):
