@@ -61,7 +61,7 @@ class Packet:
         self.end_angle = int.from_bytes(self.raw_data[42:44], 'little') * 0.01
         self.timestamp = int.from_bytes(self.raw_data[44:46], 'little')
         if self.timestamp > 30000:
-            return
+            raise ValueError
         for i in range(6, 42, 3):
             three_bytes = self.raw_data[i:i+3]
             distance = int.from_bytes(three_bytes[0:2], 'little')
@@ -120,7 +120,10 @@ class Lidar:
                     #and there are already some bytes recorded
                     if len(current_bytes) > 0:
                         #compose them into a Packet Object
-                        new_packet = Packet(current_bytes)
+                        try:
+                            new_packet = Packet(current_bytes)
+                        except ValueError:
+                            continue
                         #and if it's complete
                         if new_packet.complete:
                             #try to add it into a Circle Object
