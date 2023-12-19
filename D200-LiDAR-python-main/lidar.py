@@ -160,8 +160,8 @@ if __name__ == "__main__":
                     filtered_data.append(d)
 
         for i, lm in enumerate(filtered_data):
-            x.append(lm.distance / 10 * sin(math.radians(float(lm.angle))))
-            y.append(lm.distance / 10 * cos(math.radians(float(lm.angle))))
+            x.append(lm.distance * sin(math.radians(float(lm.angle))))
+            y.append(lm.distance * cos(math.radians(float(lm.angle))))
 
     plt.scatter(x, y) 
     plt.show()
