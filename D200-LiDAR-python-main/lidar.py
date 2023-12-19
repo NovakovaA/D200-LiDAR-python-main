@@ -148,14 +148,14 @@ if __name__ == "__main__":
     for _ in range(10):
         data = lidar.capture_circle()
 
-        filtered_data = copy.deepcopy(data)
-        filtered_data.packet_list = []
+        filtered_data = []
 
         for p in data.packet_list:
-            if p.distance > 0:
-                filtered_data.packet_list.append(p)
+            for d in p.datapoints:
+                if p.distance > 0:
+                    filtered_data.append(p)
 
-        for i, lm in enumerate(filtered_data.packet_list):
+        for i, lm in enumerate(filtered_data):
                 x.append(lm.distance * sin(lm.angle * pi / 180))
                 y.append(lm.distance * cos(lm.angle * pi / 180))
 
